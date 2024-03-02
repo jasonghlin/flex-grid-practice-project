@@ -1,0 +1,761 @@
+/* 因為預設 1 rem = 16px 為了方便，把 1 rem 調整成 10px (10/16 * 100%) */
+/* 為了更好的測量大小，將 box-sizing 調整成 border-box */
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* navbar */
+/* sidebar */
+.sidebar {
+  width: 8rem;
+  height: 100%;
+  background-color: #eee;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+}
+
+.menu-icon {
+  margin-top: 3rem;
+  cursor: pointer;
+}
+
+.line {
+  height: .2rem;
+  /* 整個 side-bar 8rem，menu-icon 大概佔 1/3，因此設定 2.5 */
+  width: 2.5rem;
+  background-color: #222;
+  /* 讓三條線分開，變成 menu-icon */
+  margin-bottom: .6rem;
+}
+
+/* 先讓 line-1 line-3 看起來較短，滑鼠碰到時再變長 */
+.line-1,
+.line-3 {
+  width: 1.8rem;
+  transition: all .4s;
+}
+
+.menu-icon:hover .line {
+  width: 2.5rem;
+}
+
+.social-icons-list {
+  list-style: none;
+  padding: 0;
+  /* 要先把高度變高才有垂直空間可以 flex，但數字不知道如何算出來的*/
+  height: 25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.social-link {
+  /* 讓字體大小接近 line 1.8 以及 2.5 */
+  font-size: 2rem;
+  color: #777;
+  transition: color .3s
+}
+
+.social-link:hover {
+  color: #de8886
+}
+
+.year {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: #555;
+}
+
+/* end of sidebar */
+
+/* navigation */
+.navigation {
+  /* 讓 navigation 不要被 sidebar 蓋住 */
+  /* margin-left: 8rem; */
+  /* navigation width: 40，siderbar width: 8rem，因此要向左移動 32rem 至少讓兩個重疊蓋住 navigation*/
+  left: -32rem;
+  /* 消除 side bar 上因 h1 的 margin 而產生的 1rem 空白，兩種做法：*/
+  /* 第一種：select navigation 的 h1 設定 margin 0 */
+  /* 第二種：讓 navigation 也變成 position: fixed，跳脫 normal flow */
+  position: fixed;
+  width: 40rem;
+  height: 100%;
+  background: linear-gradient(to top, rgba(34, 32, 41, 1), rgba(34, 32, 41, .8)), url("../img/nav-bg.jpeg") center no-repeat;
+  background-size: cover;
+  /* 裡面三個東西的佈局和 sidebar 一樣 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  transition: left .8s cubic-bezier(1, 0, 0, 1);
+}
+
+.navigation-heading {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 3.5rem;
+  font-weight: 300;
+  letter-spacing: .2rem;
+  color: #de8886;
+  text-align: center;
+}
+
+.navigation-search {
+  /* 為了讓搜尋圖案可以放到 input 內，這裡要設定 postion: relative */
+  position: relative;
+}
+
+/* form */
+.navigation-search-input {
+  width: 30rem;
+  padding: 1rem 2rem;
+  background-color: rgba(0, 0, 0, .3);
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 1.6rem;
+  color: #de8886;
+  letter-spacing: .1rem;
+  outline: none;
+  border: .1rem solid #555;
+  border-radius: 10rem;
+  transition: background-color .3s;
+}
+
+.navigation-search-input:focus {
+  background-color: rgba(0, 0, 0, .1);
+}
+
+/* end of form */
+/* btn */
+.navigation-search-btn {
+  border: none;
+  background-color: transparent;
+  color: #de8886;
+  /* 比 input 的字體大小再大一點點 */
+  font-size: 1.7rem;
+  /* 把搜尋圖案放到 input 內 */
+  position: absolute;
+  top: .8rem;
+  right: 1rem;
+  cursor: pointer;
+}
+
+.navigation-search-btn:focus {
+  outline: none;
+}
+
+/* end of btn */
+/* navigation list */
+.navigation-list {
+  /* 移除 bullet point */
+  list-style: none;
+  /* 同時也要移除 padding，這樣才能真的置中 */
+  padding: 0;
+  /* 高度近似於左邊的 navigation items */
+  height: 28rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navigation-item {
+  /* 為了能讓 navigation-link::before position 產生效果 */
+  position: relative;
+}
+
+/* navigation link */
+.navigation-link {
+  color: #fff;
+  /* 和 search bar 大小一樣 */
+  font-size: 1.6rem;
+  font-weight: 400;
+  letter-spacing: .1rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color .5s
+}
+
+.navigation-link::before {
+  content: "";
+  width: 0rem;
+  height: .1rem;
+  background-color: #de8886;
+  /* 為了要放到字的左邊，要自行設定 position */
+  position: absolute;
+  top: 1rem;
+  left: -4rem;
+  transition: width .5s cubic-bezier(1, 0, 0, 1)
+}
+
+.navigation-link::after {
+  content: "";
+  width: 0rem;
+  height: .1rem;
+  background-color: #de8886;
+  /* 為了要放到字的左邊，要自行設定 position */
+  position: absolute;
+  top: 1rem;
+  right: -4rem;
+  transition: width .5s cubic-bezier(1, 0, 0, 1)
+}
+
+
+.navigation-link:hover {
+  color: #de8886;
+}
+
+.navigation-link:hover::before,
+.navigation-link:hover::after {
+  width: 3rem;
+}
+
+/* end of navigation link */
+/* end of navigation list */
+/* copyright */
+.copyright {
+  color: #fff;
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+/* end of copyright */
+.checkbox:checked~.navigation {
+  left: 8rem
+}
+
+/* hamburger menu */
+.checkbox:checked~.sidebar .line-1 {
+  transform: rotate(-405deg) translate(-5px, 6px);
+  width: 2.5rem;
+
+}
+
+.checkbox:checked~.sidebar .line-2 {
+  opacity: 0;
+
+}
+
+.checkbox:checked~.sidebar .line-3 {
+  transform: rotate(405deg) translate(-5px, -6px);
+  width: 2.5rem;
+}
+
+/* end of hamburger menu */
+/* end of navigation */
+/* end of navbar */
+
+/* header */
+/* 因為被蓋在 sidebar 後面，因此要往右推 8rem */
+.header {
+  margin-left: 8rem;
+  height: 100vh;
+  background: linear-gradient(to top, rgba(0, 0, 0, .6), rgba(0, 0, 0, .5)), url(../img/header-1.jpeg) center no-repeat;
+  background-size: cover;
+}
+
+/* brand */
+.brand {
+  display: flex;
+  cursor: pointer;
+}
+
+.hotel-heading {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 2.7rem;
+  font-weight: 400;
+  color: #de8886;
+  letter-spacing: .2rem;
+}
+
+/* end of brand */
+/* banner */
+.banner {
+  color: #ddd;
+  height: 65rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner-heading {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 7rem;
+  font-weight: 400;
+  margin: 0;
+  animation: anim 2s;
+}
+
+.banner-paragraph {
+  font-size: 3.5rem;
+  font-weight: 300;
+  /* 因為預設在 delay time 之前都會是維持原狀態也就是 opacity: 1，因此要設定 animation fill mode */
+  animation: anim 1.5s 0.5s backwards;
+}
+
+.banner-button {
+  width: 21rem;
+  padding: 1.2rem 2rem;
+  font-size: 2rem;
+  color: #333;
+  letter-spacing: .1rem;
+  border: none;
+  border-radius: 10rem;
+  outline: none;
+  background: linear-gradient(to right, gold, goldenrod);
+  cursor: pointer;
+  animation: anim 1s 1s backwards;
+}
+
+.banner-button:hover {
+  background: linear-gradient(to left, gold, goldenrod);
+}
+
+.banner-button:active {
+  transform: translateY(.2rem)
+}
+
+/* end of banner */
+
+/* animation */
+@keyframes anim {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* end of animation */
+
+/* end of header */
+
+/* about us */
+.about-us {
+  margin-left: 8rem;
+  /* 讓左右 part 並排 */
+  display: flex;
+  background-color: #ddd;
+
+}
+
+.about-us-content {
+  /* 希望佔整個篇幅的一半，但不希望有 grow */
+  /* 但因為我們設定 flex shrink 1，因此如果不設定右邊的話他會自動縮小反而佔不到一半 */
+  flex: 0 1 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10rem;
+  /* 但此時 box 會超出一半 */
+  box-sizing: border-box;
+}
+
+.about-us-heading {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 4rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: #555;
+}
+
+
+
+.sub-heading {
+  font-size: 3.5rem;
+  font-weight: 300;
+  letter-spacing: .2rem;
+  color: #b85d1c;
+}
+
+.about-us-paragraph {
+  font-size: 1.6rem;
+  font-style: italic;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.about-us-btn {
+  width: 15rem;
+  padding: .7rem .5rem;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  color: #b85d1c;
+  background-color: transparent;
+  border: .1rem solid #b85d1c;
+  outline: none;
+  cursor: pointer;
+}
+
+.btn-arrow {
+  margin-left: .5rem;
+  transition: margin-left.4s
+}
+
+.about-us-btn:hover .btn-arrow {
+  margin-left: 1.5rem;
+}
+
+.about-us-images {
+  /* grow 設定 1 代表他會自己長到他可以長的最大極限 */
+  flex: 1 1;
+  position: relative;
+}
+
+/* image */
+.image {
+  width: 32rem;
+  position: absolute;
+  /* 讓圖片的左上角都位在 container 的中間 */
+  top: 50%;
+  left: 50%;
+  box-shadow: 0 3rem 6rem rgba(0, 0, 0, .4);
+  border-radius: .4rem;
+  border: .2rem solid #b85d1c
+}
+
+.image-1 {
+  /* 右上角 */
+  transform: translate(-20%, -90%);
+}
+
+.image-2 {
+  /* 1, 3 中間 */
+  transform: translate(-70%, -70%);
+}
+
+.image-3 {
+  /* 和 top left 最大的不同是，translate 是從目前的位置移動 50%，因此會置中*/
+  transform: translate(-50%, -50%);
+
+}
+
+.image-4 {
+  /*  */
+  transform: translate(-30%, -30%);
+}
+
+/* end of image */
+
+/* end about us */
+
+/* common header */
+.common-header {
+  padding: .5rem;
+  text-align: center;
+  color: #b85d1c;
+}
+
+.common-heading {
+  font-size: 4rem;
+  font-weight: 300;
+  letter-spacing: .2rem;
+}
+
+.small-underline {
+  width: 9rem;
+  height: .1rem;
+  background-color: #b85d1c;
+  /* 左右的 Margin 要 auto 這樣短的線才會置中 */
+  margin: 0 auto 1rem auto;
+
+}
+
+.big-underline {
+  width: 20rem;
+  height: .1rem;
+  background-color: #b85d1c;
+  /* 要用 auto 才能讓他置中 */
+  margin: auto;
+
+}
+
+/* end of commom header */
+
+/* rooms */
+.rooms {
+  margin-left: 8rem;
+}
+
+.rooms-cards-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+}
+
+.room-card {
+  width: 60rem;
+  margin: 5rem;
+  background-color: #15141b;
+  box-shadow: 0 3rem 6rem rgba(0, 0, 0, .3);
+}
+
+.room-img {
+  /* 這樣才不會超出容器的空間 */
+  width: 100%
+}
+
+.room-card-content {
+  color: #ddd;
+  padding: 2rem;
+}
+
+.room-card-heading {
+  margin: 0;
+  font-size: 3rem;
+  font-weight: 300;
+}
+
+.room-card-paragraph {
+  font-size: 1.5rem;
+  color: #777;
+
+}
+
+.room-price {
+  font-size: 5rem;
+  font-weight: 300;
+  text-align: right;
+  margin: 0;
+}
+
+.room-card-btn {
+  width: 15rem;
+  padding: 1.5rem 1rem;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  color: #b85d1c;
+  background-color: transparent;
+  border: .1rem solid #b85d1c;
+  border-radius: 10rem;
+  outline: none;
+  cursor: pointer;
+}
+
+.rooms-btn-wrapper {
+  text-align: center;
+}
+
+.rooms-btn {
+  width: 20rem;
+  padding: 1.5rem 1rem;
+  margin: 4rem 0;
+  background-color: transparent;
+  text-transform: uppercase;
+  color: #b85d1c;
+  border: .2rem solid #b85d1c;
+  outline: none;
+  cursor: pointer;
+  box-shadow: 0 1.5rem 6rem rgba(0, 0, 0, 0.2);
+  transition: all .2s
+}
+
+.rooms-btn:hover {
+  color: #ddd;
+  background-color: #b85d1c;
+}
+
+/* end of rooms */
+
+/* customers */
+.customers {
+  margin-left: 8rem;
+  padding-bottom: 7rem;
+  background-color: #15141b;
+
+}
+
+.customers-paragraph {
+  font-size: 1.8rem;
+  color: #ddd;
+  width: 50%;
+  margin: 2rem auto 8rem auto;
+  text-align: center;
+}
+
+.customers-card-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.customers-card {
+  background-color: #eee;
+  width: 60rem;
+  display: flex;
+}
+
+.customer-image-wrapper {
+  margin: auto 0;
+}
+
+.customer-image {
+  width: 20rem;
+  margin-left: -1.3rem;
+
+}
+
+.customer-info {
+  padding: 0 2rem;
+}
+
+.customer-fullname {
+  font-size: 2rem;
+  font-weight: 300;
+  margin-bottom: 0;
+}
+
+.customer-paragraph-1 {
+  font-size: 1.2rem;
+  font-style: italic;
+  color: #b85d1c;
+}
+
+.customer-paragraph-2 {
+  font-size: 1.3rem;
+  font-style: italic;
+}
+
+/* end of customers */
+
+/* footer */
+.footer {
+  margin-left: 8rem;
+}
+
+.main-part {
+  display: flex;
+  justify-content: space-between;
+  background-color: #1c1c1c;
+  padding: 4rem;
+}
+
+.footer-heading {
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: goldenrod;
+  margin-top: 1rem 0 3rem 0;
+}
+
+.footer-list {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-list-item {
+  margin-bottom: 2rem;
+
+}
+
+.footer-list-link {
+  font-size: 1.4rem;
+  text-decoration: none;
+  color: #bbb;
+
+}
+
+.contact p {
+  font-size: 1.5rem;
+  color: #bbb;
+  margin-bottom: 4rem
+}
+
+.footer-form {
+  display: flex;
+}
+
+.footer-input {
+  width: 25rem;
+  padding: 1rem;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 1.8rem;
+  color: #444;
+  outline: none;
+}
+
+.footer-btn {
+  padding: 1rem;
+  background-color: #b85d1c;
+  color: #ddd;
+  border: none
+}
+
+.gallery {
+  max-width: 45rem;
+
+}
+
+.image-wrapper {
+  /* 三個 image 36rem 剛好塞得下 45rem */
+  width: 12rem;
+  margin: .4rem;
+  /* 讓圖片放大時不要超出邊框 */
+  overflow: hidden;
+}
+
+.footer-image {
+  /* 讓 image 不要超出 wrapper */
+  width: 100%;
+  /* 因為 image 高度不足以 cover wrapper，所以導致 wrapper 高度會稍微變大 */
+  height: 100%;
+  /* 完成 hover 時圖像會有抖動狀況 */
+  backface-visibility: hidden;
+  transition: all .5s;
+}
+
+.gallery-images {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.footer-image:hover {
+  transform: scale(1.3);
+  opacity: .8
+}
+
+.creator-part {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #111;
+  padding: 0 4rem;
+}
+
+.copyright-text {
+  font-size: 1.3rem;
+  color: #aaa;
+}
+
+.text-right {
+  font-size: 1.4rem;
+  color: #bbb
+}
+
+.text-right i {
+  font-size: 2rem;
+  margin: 1.5rem;
+  color: tomato;
+}
+
+.text-right span {
+  color: gold;
+}
+
+/* end of footer */
