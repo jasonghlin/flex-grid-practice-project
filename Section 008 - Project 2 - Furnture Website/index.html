@@ -13,6 +13,45 @@
 </head>
 
 <body>
+    <!-- model box -->
+    <input type="checkbox" id="show-hide-forms" hidden>
+    <div class="forms-wrapper">
+        <!-- 到下方建立 label 來用 Sign Up 開啟 model box -->
+        <!-- 製作 x 離開-->
+        <label for="show-hide-forms" class="x-btn">&#10005;</label>
+        <!-- 接著要製作 model box 內的 navigation form (Sign Up/ Sign In)-->
+        <!-- 因此需要 click event，因此又需要另一個 checkbox -->
+        <input type="checkbox" id="show-form" hidden>
+        <!-- 製作 box model 內的 Sign Up / Sign In btn -->
+        <div class="show-btns-wrapper">
+            <label for="show-form" class="show-form-btn show-signup-form">Sign Up</label>
+            <label for="show-form" class="show-form-btn show-login-form">Log In</label>
+        </div>
+
+        <!-- 製作 Sign Up form -->
+        <form class="signup-form">
+            <h3 class="form-heading">Sign Up</h3>
+            <!-- 因為大小跟其他剩下的 input 不同，因此用 div 包裝 -->
+            <div class="fullname-inputs-wrapper">
+                <input type="text" placeholder="First Name">
+                <input type="text" placeholder="Last Name">
+            </div>
+
+            <input type="text" class="form-input" placeholder="Username">
+            <input type="email" class="form-input" placeholder="Email Address">
+            <input type="password" class="form-input" placeholder="Password">
+            <input type="submit" value="SIGN UP" class="form-btn">
+        </form>
+        <!-- 製作 Login form -->
+        <form class="login-form">
+            <h3 class="form-heading">Login</h3>
+            <input type="email" class="form-input" placeholder="Email Address">
+            <input type="password" class="form-input" placeholder="Password">
+            <input type="submit" value="LOG IN" class="form-btn">
+        </form>
+    </div>
+    <!-- end of model box -->
+
     <!-- Navbar -->
     <div class="container">
         <!-- social icon -->
@@ -45,8 +84,11 @@
             <ul class="first-nav-list">
                 <li class="fist-nav-item">
                     <a href="#" class="first-nav-link">
-                        <i class="fas fa-sign-in-alt"></i>
-                        Sign Up / Log In
+                        <!-- 利用 label 來和上方的 checkbox 連動，製作 sign up model box 效果 -->
+                        <label for="show-hide-forms">
+                            <i class="fas fa-sign-in-alt"></i>
+                            Sign Up / Log In
+                        </label>
                     </a>
                 </li>
                 <li class="fist-nav-item">
@@ -261,6 +303,39 @@
         </section>
 
         <!-- end of bestselling furniture -->
+
+        <!-- gallery -->
+        <section class="gallery">
+            <img src="./images/gallery-img-1.jpeg" class="gallery-img gallery-img-1">
+            <img src="./images/gallery-img-2.jpeg" class="gallery-img gallery-img-2">
+            <img src="./images/gallery-img-3.jpeg" class="gallery-img gallery-img-3">
+            <img src="./images/gallery-img-4.jpeg" class="gallery-img gallery-img-4">
+            <img src="./images/gallery-img-5.jpeg" class="gallery-img gallery-img-5">
+            <img src="./images/gallery-img-6.jpeg" class="gallery-img gallery-img-6">
+            <img src="./images/gallery-img-7.jpeg" class="gallery-img gallery-img-7">
+            <img src="./images/gallery-img-8.jpeg" class="gallery-img gallery-img-8">
+            <img src="./images/gallery-img-9.jpeg" class="gallery-img gallery-img-9">
+            <img src="./images/gallery-img-10.jpeg" class="gallery-img gallery-img-10">
+            <img src="./images/gallery-img-11.jpeg" class="gallery-img gallery-img-11">
+            <img src="./images/gallery-img-12.jpeg" class="gallery-img gallery-img-12">
+        </section>
+        <!-- end of gallery -->
+
+        <!-- contact -->
+        <section class="contact">
+            <h1 class="contact-heading">Join us and be in the know</h1>
+            <form class="contact-form">
+                <input type="text" class="contact-input" placeholder="Enter email address">
+                <input type="submit" class="contact-btn" value="Sign Up">
+            </form>
+        </section>
+        <!-- end of contact contact -->
+
+        <!-- footer -->
+        <footer class="footer">
+            <p>&copy; CodeAnd Create. All rights reserved</p>
+        </footer>
+        <!-- end of footer -->
     </div>
 
 
